@@ -1,6 +1,6 @@
 import { getCuratedSummaries } from "@/lib/guides";
 import { GuideCard } from "@/components/GuideCard";
-import { GenerateBox } from "@/components/GenerateBox";
+import { LiveGuide } from "@/components/LiveGuide";
 
 export default function Home() {
   const summaries = getCuratedSummaries();
@@ -50,7 +50,7 @@ export default function Home() {
             apps we&apos;ve never seen.
           </p>
           <div className="mt-4">
-            <GenerateBox />
+            <LiveGuide />
           </div>
         </section>
 

@@ -159,6 +159,15 @@ but `verified` tags from the live agent should still be treated as `claimed` unt
 one-line system-prompt tightening (require the *specific cited source* to state a fact before
 tagging it `verified`) is the obvious next improvement.
 
+**We then applied that fix and re-verified.** A second live run (**HubSpot**) came out *moderate*
+with non-obvious findings — a 10/25-account install cap on unlisted apps and a "3 active installs
+required before you can list" chicken-and-egg. Every `verified` tag now carried a source URL, and
+we spot-checked the install-cap claim against
+[HubSpot's own doc](https://developers.hubspot.com/docs/apps/developer-platform/build-apps/manage-apps-in-hubspot):
+confirmed verbatim ("up to 10 allowlisted accounts … up to 25 accounts … unlimited after listing").
+The find→fix→re-verify loop is the point: the agent's output is useful *and* its confidence
+calibration is now auditable.
+
 ---
 
 ## Limitations
