@@ -6,6 +6,12 @@
 (The curated library loads instantly; the "Generate a guide for any app" box runs
 a real agent live — give it ~1–2 minutes. Verified end to end in production.)
 
+![Launchpad demo](docs/demo.gif)
+
+*The demo above: the Composio reframe, the filterable at-a-glance matrix (filtered to BYO-only
+apps), and the interactive scope toggle flipping Google from Easy (sign-in) to Brutal (Gmail
+content + CASA).*
+
 To let their users connect an app (Gmail, Slack, Salesforce…), an AI-agent developer
 often has to register *their own* OAuth app with the provider and get it approved.
 Some take an afternoon; some take weeks and a paid security audit. Today that path is
@@ -58,15 +64,37 @@ Five decisions fell out of understanding that:
 
 ## What's in the box
 
-- **Curated library (4 apps, chosen for contrast), source-checked:**
-  - **GitHub** — *easy.* Register and it works; no review to connect users.
-  - **Slack** — *moderate.* Instant for your workspace + unlisted OAuth; review only for Marketplace listing.
-  - **Google / Gmail** — *hard.* Gmail content = **restricted scopes** → OAuth verification (~6 wks) **plus a CASA security audit** (paid, annual).
-  - **Salesforce** — *the "scary headline is usually the wrong headline" case.* A Connected App for your users' orgs is quick; the $999, 2–4-month AppExchange security review only applies to marketplace distribution.
-- **Live generation** — type any app (Notion, HubSpot, Stripe, Zoom…) and an agent (Claude +
-  web search) researches its real setup/approval process and returns a guide in the same schema.
-- **One schema, one renderer.** Curated and live guides share `src/lib/schema.ts` (Zod-validated)
-  and `src/components/GuideView.tsx`, so a malformed live guide is rejected rather than rendered broken.
+**9 curated, source-checked guides** — deliberately mixing familiar names with uncommon, BYO-only
+cases that *no managed platform covers* (the direct rebuttal to "isn't this just Composio?"):
+
+| App | Difficulty | The story |
+|---|---|---|
+| **GitHub** | easy | Register and it works; no review to connect users. |
+| **Slack** | moderate | Instant for your workspace + unlisted OAuth; review only for Marketplace listing. |
+| **Stripe** | moderate | Connect OAuth; test mode instant, live needs a quick platform-profile activation. |
+| **Salesforce** | moderate | The "scary headline is wrong" case: a Connected App is quick; the $999 AppExchange review is only for marketplace distribution. |
+| **DocuSign** | moderate | A *hidden* go-live promotion gate most newcomers don't see coming. |
+| **Shopify** | moderate | Clean two-tier: a custom app installs instantly; a public App Store listing is reviewed. |
+| **Google / Gmail** | hard | Gmail content = restricted scopes → verification (~6 wks) **+ a paid CASA audit**. |
+| **Meta / Facebook** | hard | Business Verification + per-permission App Review with screencasts. |
+| **Plaid** | hard | **No managed shortcut exists** — compliance review for Production, and bank OAuth reported up to ~3–4 months. |
+
+**Live generation** — type any app (Notion, HubSpot, Zoom…) and an agent (Claude `opus-5` + web
+search) researches its real setup/approval process and returns a guide in the same schema, with a
+shareable `/guide/<app>?app=<name>` URL.
+
+**Depth features:**
+- **Interactive scope toggle** — on guides where scope decides everything (Google, Plaid, Shopify),
+  pick a permission tier and watch difficulty and time change live.
+- **"Isn't this Composio?" reframe** — the homepage positions Launchpad as the missing layer: Composio
+  manages ~124 toolkits (nothing to guide) and hands you a blank credentials form for ~258 BYO ones
+  (everything to guide).
+- **At-a-glance matrix** — every guide, sortable and filterable by difficulty and managed-vs-BYO.
+- **[/how-it-works](https://oauth-launchpad-seven.vercel.app/how-it-works)** — a methodology page on the
+  evidence model and what was verified vs. not.
+
+**One schema, one renderer.** Curated and live guides share `src/lib/schema.ts` (Zod-validated) and
+`src/components/GuideView.tsx`, so a malformed live guide is rejected rather than rendered broken.
 
 ---
 
