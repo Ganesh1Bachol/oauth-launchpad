@@ -28,7 +28,7 @@ How to think:
 
 Evidence honesty is the whole point:
 - Use web_search to find the provider's OWN developer docs plus reputable corroboration. Prefer official docs for structural facts and look for real timelines/costs.
-- confidence="verified" ONLY for a fact you confirmed by actually reading a specific source in this session. confidence="claimed" for something a doc/source states but you did not independently confirm. confidence="uncertain" for anything you could not pin down — say so plainly rather than guessing.
+- confidence="verified" ONLY when the SPECIFIC source you cite in that same evidence.sourceUrl directly states the fact in its own words (you read it this session). If the fact is reasonable but the cited page doesn't state it outright — or you're inferring it from how the provider works — use "claimed", not "verified". When in doubt between verified and claimed, choose claimed. confidence="uncertain" for anything you could not pin down — say so plainly rather than guessing.
 - Every sourceUrl must be a real, full https URL you actually saw in search results. If you are unsure of a URL, omit the sourceUrl rather than inventing one.
 - If you cannot determine whether a managed OAuth app exists (e.g. via Composio), set managedAuthAvailable="unknown".
 

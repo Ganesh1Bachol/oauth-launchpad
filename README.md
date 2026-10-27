@@ -144,9 +144,20 @@ This section is deliberately explicit — judging evidence is part of the point.
 - Exact review timelines vary widely and change often; treat all time figures as planning
   estimates and confirm against the linked sources.
 - Salesforce API/OAuth availability differs by edition — flagged `uncertain` in that guide.
-- **The live-generation agent is implemented but, in this submission, has not yet been run
-  against a live API key.** The schema-validation safety net is in place, but real-world output
-  quality for arbitrary apps is unproven until you run it with a key.
+
+**Live agent — run and spot-checked.** We generated a guide for **Notion** (not in the library)
+live: the agent applied the two-tier framework correctly (rated it *easy*; Marketplace listing
+in blockers), surfaced real Notion-specific nuance (coarse "capabilities" instead of scopes,
+page-scoped consent, irreversible installation scope), and cited 6 real sources. We then
+fact-checked three of its claims against Notion's own
+[public-connections doc](https://developers.notion.com/guides/get-started/public-connections):
+"installation scope is irreversible" (tagged `verified`) ✅ confirmed verbatim; capabilities +
+page-scoped consent (tagged `claimed`) ✅ confirmed; "a workspace owner is required to create a
+connection" (tagged `verified`) ⚠️ **not stated on the cited page** — a case of the agent
+over-applying `verified`. Takeaway: the live output is genuinely useful and mostly well-calibrated,
+but `verified` tags from the live agent should still be treated as `claimed` until confirmed. A
+one-line system-prompt tightening (require the *specific cited source* to state a fact before
+tagging it `verified`) is the obvious next improvement.
 
 ---
 
