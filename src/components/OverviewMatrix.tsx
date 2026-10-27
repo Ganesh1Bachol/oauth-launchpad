@@ -108,9 +108,9 @@ export function OverviewMatrix({ guides }: { guides: GuideSummary[] }) {
         </table>
       </div>
       <p className="mt-2 text-xs text-[var(--muted)]">
-        <strong>BYO only</strong> = no managed shortcut exists anywhere; you must register and get
-        approved yourself. These are the cases a guide matters most — and the ones Composio can&apos;t
-        do for you.
+        <strong>BYO</strong> = bring your own OAuth app. <strong>BYO only</strong> means no managed
+        shortcut exists, so you register and get approved yourself — the cases where a guide matters
+        most.
       </p>
     </div>
   );

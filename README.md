@@ -8,9 +8,8 @@ a real agent live — give it ~1–2 minutes. Verified end to end in production.
 
 ![Launchpad demo](docs/demo.gif)
 
-*The demo above: the Composio reframe, the filterable at-a-glance matrix (filtered to BYO-only
-apps), and the interactive scope toggle flipping Google from Easy (sign-in) to Brutal (Gmail
-content + CASA).*
+*The demo above: the filterable at-a-glance matrix (filtered to BYO-only apps) and the interactive
+scope toggle flipping Google from Easy (sign-in) to Brutal (Gmail content + CASA).*
 
 To let their users connect an app (Gmail, Slack, Salesforce…), an AI-agent developer
 often has to register *their own* OAuth app with the provider and get it approved.
@@ -86,9 +85,11 @@ shareable `/guide/<app>?app=<name>` URL.
 **Depth features:**
 - **Interactive scope toggle** — on guides where scope decides everything (Google, Plaid, Shopify),
   pick a permission tier and watch difficulty and time change live.
-- **"Isn't this Composio?" reframe** — the homepage positions Launchpad as the missing layer: Composio
-  manages ~124 toolkits (nothing to guide) and hands you a blank credentials form for ~258 BYO ones
-  (everything to guide).
+- **"Where Launchpad fits"** — a short homepage note framing Launchpad as *complementary* to
+  managed-auth platforms: when managed OAuth exists you connect with zero setup; Launchpad is for the
+  bring-your-own-OAuth-app (BYO) path — a toolkit with no managed option, or a product that needs its
+  own app anyway (its brand on the consent screen, compliance as data controller, higher rate limits,
+  broader scopes).
 - **At-a-glance matrix** — every guide, sortable and filterable by difficulty and managed-vs-BYO.
 - **[/how-it-works](https://oauth-launchpad-seven.vercel.app/how-it-works)** — a methodology page on the
   evidence model and what was verified vs. not.
