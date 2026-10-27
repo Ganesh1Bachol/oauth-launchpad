@@ -6,6 +6,7 @@ import {
   SeverityDot,
   ManagedChip,
 } from "@/components/chips";
+import { ScopeExplorer } from "@/components/ScopeExplorer";
 
 function Section({
   title,
@@ -90,9 +91,31 @@ export function GuideView({ guide }: { guide: Guide }) {
         )}
       </p>
 
+      {guide.scopeProfiles && guide.scopeProfiles.length > 0 && (
+        <Section
+          title="It depends on your scope — try it"
+          subtitle="The same app at different permission tiers. This is why there's no single answer."
+        >
+          <ScopeExplorer profiles={guide.scopeProfiles} baseDifficulty={guide.difficulty} />
+        </Section>
+      )}
+
       {guide.managedAuthNote && (
-        <div className="mt-5 rounded-lg border-l-4 border-[var(--accent)] bg-[var(--surface)] p-3 text-sm">
-          <strong>Shortcut:</strong> {guide.managedAuthNote}
+        <div
+          className={`mt-5 rounded-lg border-l-4 p-3 text-sm ${
+            guide.managedAuthAvailable === "no"
+              ? "border-[var(--brutal)] bg-[var(--brutal-bg)]"
+              : "border-[var(--accent)] bg-[var(--surface)]"
+          }`}
+        >
+          <strong>
+            {guide.managedAuthAvailable === "no"
+              ? "No managed shortcut — this is Launchpad territory:"
+              : guide.managedAuthAvailable === "yes"
+                ? "Shortcut:"
+                : "On managed auth:"}
+          </strong>{" "}
+          {guide.managedAuthNote}
         </div>
       )}
 

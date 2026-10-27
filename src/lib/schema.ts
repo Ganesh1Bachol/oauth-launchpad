@@ -74,6 +74,22 @@ export type Blocker = z.infer<typeof Blocker>;
 export const Difficulty = z.enum(["easy", "moderate", "hard", "brutal"]);
 export type Difficulty = z.infer<typeof Difficulty>;
 
+/**
+ * A scope profile: the SAME app at a different permission tier, which can change
+ * the difficulty and the wait entirely (e.g. Google sign-in vs Gmail content).
+ * Optional per guide; when present, the guide renders an interactive toggle so a
+ * developer can see "what does it cost me at the scope I actually need?".
+ */
+export const ScopeProfile = z.object({
+  id: z.string(),
+  label: z.string(), // e.g. "Sign-in only", "Gmail content"
+  difficulty: Difficulty,
+  activeWork: z.string(),
+  approvalWait: z.string(),
+  note: z.string(), // what this tier means / what changes at it
+});
+export type ScopeProfile = z.infer<typeof ScopeProfile>;
+
 export const Source = z.object({
   title: z.string(),
   url: z.string().url(),
@@ -110,6 +126,13 @@ export const Guide = z.object({
     level: z.enum(["none", "low", "high"]),
     detail: z.string(),
   }),
+
+  /**
+   * Optional interactive scope tiers. When present, the guide shows a toggle:
+   * pick the permission tier you need and watch difficulty/time change. This is
+   * the clearest way to show that "how hard is <App>?" has no single answer.
+   */
+  scopeProfiles: z.array(ScopeProfile).optional(),
 
   prerequisites: z.array(z.string()),
   steps: z.array(Step),

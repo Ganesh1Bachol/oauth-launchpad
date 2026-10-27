@@ -33,6 +33,32 @@ export const googleGmail: Guide = {
     detail:
       "Google classifies every scope as non-sensitive, sensitive, or restricted. Non-sensitive (e.g. email, profile, openid): brand verification only, ~2–3 business days. Sensitive (e.g. Calendar, Contacts): OAuth verification, no CASA. Restricted (Gmail read/modify, broad Drive): OAuth verification PLUS CASA security assessment. Eight Gmail scopes are restricted, including gmail.readonly and gmail.modify. Choosing gmail.readonly over a narrower alternative can be the difference between weeks-plus-an-audit and nothing.",
   },
+  scopeProfiles: [
+    {
+      id: "signin",
+      label: "Sign-in only",
+      difficulty: "easy",
+      activeWork: "~1 hour",
+      approvalWait: "~2–3 business days (brand verification)",
+      note: "Non-sensitive scopes (openid, email, profile). No OAuth verification review — just brand verification so your name/logo show on the consent screen. This is the fast lane.",
+    },
+    {
+      id: "sensitive",
+      label: "Calendar / Contacts",
+      difficulty: "hard",
+      activeWork: "~2–3 hours",
+      approvalWait: "~1–6 weeks (OAuth verification, no CASA)",
+      note: "Sensitive scopes trigger full OAuth verification (scope justifications, often a demo video) but NOT a CASA security audit. Weeks of review, but no paid assessment.",
+    },
+    {
+      id: "restricted",
+      label: "Gmail content",
+      difficulty: "brutal",
+      activeWork: "~3–4 hours + CASA remediation",
+      approvalWait: "~6 weeks + CASA audit (paid, annual)",
+      note: "Restricted scopes (Gmail read/modify, broad Drive) require OAuth verification PLUS a CASA security assessment — a paid third-party audit you redo every 12 months. This is the expensive tier; avoid it if your product can.",
+    },
+  ],
   prerequisites: [
     "A Google Cloud project with the relevant API (e.g. Gmail API) enabled.",
     "A verified domain you own (via Google Search Console) for authorized domains.",
