@@ -110,10 +110,14 @@ npm run dev                  # http://localhost:3000
 
 ### Deploy (Vercel)
 
-Push to GitHub, import into Vercel, set `ANTHROPIC_API_KEY` as an env var. The curated pages
-are static; `/api/generate` runs as a serverless function. It sets `maxDuration = 300`, so the
-agent's multi-round web search fits comfortably on a **Pro** plan (Hobby caps functions at 60s —
-live generation may time out there; the curated library is unaffected).
+This repo is **connected to Vercel for continuous deployment** — every push to `main`
+builds and deploys automatically. `ANTHROPIC_API_KEY` is configured as a Vercel env var
+(it is never committed). The curated pages are static; `/api/generate` runs as a serverless
+function with `maxDuration = 300` (Vercel Fluid Compute honors this, so live generation —
+~95s — completes in production, not just locally).
+
+To deploy your own copy: push to GitHub, import the repo at vercel.com, and set
+`ANTHROPIC_API_KEY` in the project's environment variables.
 
 ---
 
