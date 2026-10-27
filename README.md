@@ -2,6 +2,10 @@
 
 **Know what it takes to ship your OAuth integration — before you start.**
 
+**▶ Live demo:** https://oauth-launchpad-seven.vercel.app
+(The curated library loads instantly; the "Generate a guide for any app" box runs
+a real agent live — give it ~1–2 minutes. Verified end to end in production.)
+
 To let their users connect an app (Gmail, Slack, Salesforce…), an AI-agent developer
 often has to register *their own* OAuth app with the provider and get it approved.
 Some take an afternoon; some take weeks and a paid security audit. Today that path is
