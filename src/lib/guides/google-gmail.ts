@@ -179,6 +179,28 @@ export const googleGmail: Guide = {
     "Engage and pay a CASA assessor; a human must own the audit and sign-off.",
     "Decide and accept the recurring annual CASA renewal commitment.",
   ],
+  preparedArtifacts: [
+    {
+      type: "scopes",
+      title: "Scope map (choose the lowest tier you can)",
+      content:
+        "# Non-sensitive — brand verification only (~2–3 days):\nopenid\nhttps://www.googleapis.com/auth/userinfo.email\nhttps://www.googleapis.com/auth/userinfo.profile\n\n# Sensitive — OAuth verification, NO CASA:\nhttps://www.googleapis.com/auth/calendar.events\nhttps://www.googleapis.com/auth/contacts.readonly\n\n# RESTRICTED — verification + CASA audit (paid, annual). Avoid if you can:\nhttps://www.googleapis.com/auth/gmail.readonly\nhttps://www.googleapis.com/auth/gmail.modify",
+      note: "Crossing from sensitive into a restricted Gmail scope is what triggers CASA. Confirm you truly need mailbox content.",
+    },
+    {
+      type: "console-path",
+      title: "Where to configure",
+      content:
+        "console.cloud.google.com → APIs & Services → OAuth consent screen (and → Credentials → Create OAuth client ID)",
+    },
+    {
+      type: "privacy-policy",
+      title: "Limited-Use privacy-policy clause (draft)",
+      content:
+        "[Your App]'s use and transfer of information received from Google APIs to any other app will adhere to the Google API Services User Data Policy, including the Limited Use requirements. We access only the Google user data required to provide [specific feature], we do not sell this data, we do not use it for advertising, and we do not allow humans to read it except with your explicit consent, for security, or as required by law.",
+      note: "Paste into your privacy policy and fill the brackets. Required framing for sensitive/restricted-scope verification.",
+    },
+  ],
   sources: [
     {
       title: "OAuth App Verification Help Center — Google",

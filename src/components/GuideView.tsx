@@ -7,6 +7,7 @@ import {
   ManagedChip,
 } from "@/components/chips";
 import { ScopeExplorer } from "@/components/ScopeExplorer";
+import { CopyBlock } from "@/components/CopyBlock";
 
 function Section({
   title,
@@ -175,6 +176,46 @@ export function GuideView({ guide }: { guide: Guide }) {
         </div>
       </Section>
 
+      {/* What the agent prepared — concrete, copy-pasteable deliverables */}
+      {guide.preparedArtifacts && guide.preparedArtifacts.length > 0 && (
+        <Section
+          title="What an agent prepared for you"
+          subtitle="Not just advice — the actual artifacts, ready to copy. This is the setup attempted as far as is practical without your accounts."
+        >
+          <div className="space-y-3">
+            {guide.preparedArtifacts.map((a, i) => {
+              const label =
+                a.type === "scopes"
+                  ? "🔑 Minimal scopes"
+                  : a.type === "privacy-policy"
+                    ? "📄 Privacy-policy draft"
+                    : a.type === "console-path"
+                      ? "🧭 Console path"
+                      : a.type === "code"
+                        ? `💻 Code${a.language ? ` · ${a.language}` : ""}`
+                        : a.type === "env"
+                          ? "⚙️ Env template"
+                          : "📋 Prepared";
+              const mono = a.type === "code" || a.type === "env" || a.type === "console-path";
+              return (
+                <div key={i} className="card p-4">
+                  <div className="mb-1 text-sm font-bold">{a.title}</div>
+                  <div className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
+                    {label}
+                  </div>
+                  {a.note && <p className="mb-2 text-sm text-[var(--muted)]">{a.note}</p>}
+                  <CopyBlock content={a.content} mono={mono} />
+                </div>
+              );
+            })}
+          </div>
+          <p className="mt-2 text-xs text-[var(--muted)]">
+            Drafts to review and adapt — not legal advice. Check scopes and policy text against the
+            provider&apos;s current requirements before you submit.
+          </p>
+        </Section>
+      )}
+
       {/* Prerequisites */}
       {guide.prerequisites.length > 0 && (
         <Section title="Before you start">
@@ -271,6 +312,43 @@ export function GuideView({ guide }: { guide: Guide }) {
           </div>
         </Section>
       )}
+
+      {/* Close the loop: where the credentials go */}
+      <Section
+        title="You've got credentials — now plug them in"
+        subtitle="Registering your OAuth app gives you three things to wire up."
+      >
+        <div className="card p-4 text-sm leading-relaxed">
+          <p>
+            You now have a <strong>client ID</strong>, a <strong>client secret</strong>, and you set a{" "}
+            <strong>redirect/callback URI</strong>. If you build on a platform like{" "}
+            <strong>Composio</strong>, that&apos;s exactly what its custom auth config expects:
+          </p>
+          <ol className="mt-2 ml-4 list-decimal space-y-1">
+            <li>Create a new auth config for the toolkit and choose the OAuth2 scheme.</li>
+            <li>Toggle on <em>&ldquo;Use your own developer credentials.&rdquo;</em></li>
+            <li>Paste your client ID and client secret.</li>
+            <li>
+              Set the redirect URI to your platform&apos;s callback (Composio shows you this URL) — and
+              make sure that same URL is registered in your OAuth app.
+            </li>
+          </ol>
+          <p className="mt-2 text-[var(--muted)]">
+            Composio returns an auth config id (<code>ac_…</code>) you pass when connecting users. The
+            reasons to bring your own app line up with Composio&apos;s own guidance: no managed option,
+            white-labeling your consent screen, dedicated rate limits, or custom scopes. The same three
+            values work for any platform&apos;s custom OAuth — or your own backend.
+          </p>
+          <a
+            href="https://docs.composio.dev/docs/auth-configuration/custom-auth-configs"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-2 inline-block text-[var(--accent)] underline-offset-2 hover:underline"
+          >
+            Composio: Custom Auth Configs →
+          </a>
+        </div>
+      </Section>
 
       {/* Sources */}
       {guide.sources.length > 0 && (

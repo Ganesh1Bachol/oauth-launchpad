@@ -160,6 +160,21 @@ export const plaid: Guide = {
     "Respond to information requests within the 3-business-day window.",
     "Own your financial-data security posture and sign Plaid's agreements.",
   ],
+  preparedArtifacts: [
+    {
+      type: "text",
+      title: "Production use-case narrative (draft for the compliance review)",
+      content:
+        "[Company] is building [product], an AI agent that helps [users] [do X]. We request the following Plaid products and why:\n- Auth: to verify account/routing for [payouts/payments].\n- Transactions: to [categorize spending / surface insights] for the user who connected their account.\nData handling: financial data is encrypted in transit and at rest, access is restricted to [systems/roles], retained for [period], and used solely to deliver the features above — never sold or used for advertising. Users can disconnect and request deletion at any time.",
+      note: "Plaid's compliance review turns on a clear, minimal, honest use-case. Fill the brackets; keep the product list minimal.",
+    },
+    {
+      type: "env",
+      title: "Env template",
+      content:
+        "PLAID_CLIENT_ID=\nPLAID_SECRET=\nPLAID_ENV=sandbox   # sandbox | production\nPLAID_REDIRECT_URI=https://yourapp.com/plaid/oauth-return",
+    },
+  ],
   sources: [
     { title: "Launch in Production checklist — Plaid Docs", url: "https://plaid.com/docs/launch-checklist/" },
     {

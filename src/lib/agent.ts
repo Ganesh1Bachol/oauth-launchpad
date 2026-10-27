@@ -25,6 +25,7 @@ How to think:
 - Almost every provider has TWO tiers: (1) connecting your own users — a first-party app, an unlisted OAuth flow, an internal/connected app — which is usually fast and review-free; and (2) public marketplace listing OR sensitive-data scopes, which trigger review and sometimes paid audits. Make clear which tier a developer is actually in. Rate difficulty for the "connect your own users" case, and put the heavy public-distribution path in blockers.
 - Scope choice can change difficulty entirely. Call this out in scopeSensitivity.
 - Draw the agent-vs-human line: an agent can research, enumerate minimal scopes, draft privacy policies / justifications, pre-fill forms, scaffold code. A human must own legal acceptance, payment, being the verified entity, recording demo videos, and final submission.
+- ATTEMPT the setup, don't just describe it. Produce concrete, copy-pasteable artifacts in preparedArtifacts: the actual minimal scope list, the exact console navigation path, and a short OAuth code snippet or env template. Add a privacy-policy or use-case draft when the provider's review needs one. These are drafts to review, so keep them accurate and minimal.
 
 Evidence honesty is the whole point:
 - Use web_search to find the provider's OWN developer docs plus reputable corroboration. Prefer official docs for structural facts and look for real timelines/costs.
@@ -47,6 +48,7 @@ Output format — CRITICAL:
   "difficulty": "easy"|"moderate"|"hard"|"brutal",
   "time": { "activeWork": string, "approvalWait": string, "evidence": Evidence },
   "scopeSensitivity": { "level": "none"|"low"|"high", "detail": string },
+  "preparedArtifacts": PreparedArtifact[],   // 2-4 concrete, copy-pasteable deliverables
   "prerequisites": string[],
   "steps": Step[],                       // 3-7 steps
   "blockers": Blocker[],                  // 1-4 blockers (approval gates, audits, prereqs)
@@ -59,6 +61,7 @@ where
   Evidence = { "confidence": "verified"|"claimed"|"uncertain", "note": string, "sourceUrl"?: string }
   Step = { "title": string, "detail": string, "actor": "agent"|"you"|"both", "estMinutes"?: number, "evidence"?: Evidence }
   Blocker = { "title": string, "description": string, "severity": "low"|"medium"|"high", "typicalWait"?: string, "cost"?: string, "avoidableBy"?: string, "evidence": Evidence }
+  PreparedArtifact = { "type": "scopes"|"privacy-policy"|"console-path"|"code"|"env"|"text", "title": string, "language"?: string, "content": string, "note"?: string }
 
 Do not include "generatedBy" or "generatedAt" — those are added by the system.`;
 

@@ -83,6 +83,11 @@ search) researches its real setup/approval process and returns a guide in the sa
 shareable `/guide/<app>?app=<name>` URL.
 
 **Depth features:**
+- **Agent-prepared artifacts** — guides don't just *describe* the setup, they *attempt* it: copy-able
+  minimal scope lists, the exact console path, an OAuth code snippet, an env template, and a privacy-policy
+  or compliance-review draft. (Curated guides ship these; the live agent generates them too.)
+- **Close the loop** — a final "you've got credentials, now plug them in" step that maps the client
+  ID/secret/redirect URI straight into Composio's custom auth config (and any platform's, or your own backend).
 - **Interactive scope toggle** — on guides where scope decides everything (Google, Plaid, Shopify),
   pick a permission tier and watch difficulty and time change live.
 - **"Where Launchpad fits"** — a short homepage note framing Launchpad as *complementary* to

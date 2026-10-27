@@ -75,6 +75,21 @@ export const Difficulty = z.enum(["easy", "moderate", "hard", "brutal"]);
 export type Difficulty = z.infer<typeof Difficulty>;
 
 /**
+ * A concrete, copy-pasteable deliverable the agent prepared — the "attempt as
+ * much of the setup as practical" part. Not just "you'll need a privacy policy"
+ * but an actual draft; not "pick minimal scopes" but the exact list; not
+ * "implement OAuth" but a code snippet. This is where guidance becomes work done.
+ */
+export const PreparedArtifact = z.object({
+  type: z.enum(["scopes", "privacy-policy", "console-path", "code", "env", "text"]),
+  title: z.string(),
+  language: z.string().optional(), // for code artifacts (e.g. "ts", "bash")
+  content: z.string(), // the copy-pasteable text
+  note: z.string().optional(), // one-line context
+});
+export type PreparedArtifact = z.infer<typeof PreparedArtifact>;
+
+/**
  * A scope profile: the SAME app at a different permission tier, which can change
  * the difficulty and the wait entirely (e.g. Google sign-in vs Gmail content).
  * Optional per guide; when present, the guide renders an interactive toggle so a
@@ -133,6 +148,12 @@ export const Guide = z.object({
    * the clearest way to show that "how hard is <App>?" has no single answer.
    */
   scopeProfiles: z.array(ScopeProfile).optional(),
+
+  /**
+   * Concrete deliverables the agent prepared for the developer to copy and use —
+   * the setup "attempted" as far as is practical without the developer's accounts.
+   */
+  preparedArtifacts: z.array(PreparedArtifact).optional(),
 
   prerequisites: z.array(z.string()),
   steps: z.array(Step),

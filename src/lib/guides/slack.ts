@@ -120,6 +120,28 @@ export const slack: Guide = {
     "Install it to a workspace you control and confirm the flow.",
     "Decide whether you need a Marketplace listing (and submit it yourself if so).",
   ],
+  preparedArtifacts: [
+    {
+      type: "scopes",
+      title: "Minimal bot scopes (adjust to features)",
+      content:
+        "chat:write        — post messages\nchannels:read     — list public channels\nusers:read        — resolve user info\n\n# Add only as needed:\nchannels:history  — read public channel messages\nim:write          — DM users\nfiles:write       — upload files",
+    },
+    {
+      type: "code",
+      title: "App manifest (paste to create the app in one shot)",
+      language: "yaml",
+      content:
+        'display_information:\n  name: Your App\noauth_config:\n  redirect_urls:\n    - https://yourapp.com/auth/slack/callback\n  scopes:\n    bot:\n      - chat:write\n      - channels:read\n      - users:read\nsettings:\n  org_deploy_enabled: false\n  socket_mode_enabled: false',
+    },
+    {
+      type: "code",
+      title: "OAuth v2 code→token exchange",
+      language: "ts",
+      content:
+        'const res = await fetch("https://slack.com/api/oauth.v2.access", {\n  method: "POST",\n  headers: { "Content-Type": "application/x-www-form-urlencoded" },\n  body: new URLSearchParams({\n    client_id: process.env.SLACK_CLIENT_ID!,\n    client_secret: process.env.SLACK_CLIENT_SECRET!,\n    code, // from the ?code=... callback\n    redirect_uri: process.env.SLACK_REDIRECT_URI!,\n  }),\n});\nconst data = await res.json(); // data.access_token, data.team, ...',
+    },
+  ],
   sources: [
     {
       title: "Distributing Slack apps — Slack docs",

@@ -119,6 +119,33 @@ export const github: Guide = {
     "Hold the client secret in your secret manager.",
     "Authorize the app the first time to confirm the flow.",
   ],
+  preparedArtifacts: [
+    {
+      type: "scopes",
+      title: "Minimal scopes for a typical agent",
+      content:
+        "read:user      — basic profile\nuser:email     — the user's email address\n\n# Add ONLY if your features need them:\nrepo           — full control of private repos (broad; users will notice)\npublic_repo    — public repos only (prefer this over `repo` when possible)\nread:org       — read org membership",
+      note: "Request the smallest set — scope breadth mostly affects user trust, not GitHub approval.",
+    },
+    {
+      type: "console-path",
+      title: "Where to register",
+      content: "GitHub → Settings → Developer settings → OAuth Apps → New OAuth App",
+    },
+    {
+      type: "code",
+      title: "OAuth code→token exchange",
+      language: "ts",
+      content:
+        'const res = await fetch("https://github.com/login/oauth/access_token", {\n  method: "POST",\n  headers: { Accept: "application/json", "Content-Type": "application/json" },\n  body: JSON.stringify({\n    client_id: process.env.GITHUB_CLIENT_ID,\n    client_secret: process.env.GITHUB_CLIENT_SECRET,\n    code, // from the ?code=... callback\n    redirect_uri: process.env.GITHUB_REDIRECT_URI,\n  }),\n});\nconst { access_token } = await res.json();',
+    },
+    {
+      type: "env",
+      title: "Env template",
+      content:
+        "GITHUB_CLIENT_ID=\nGITHUB_CLIENT_SECRET=\nGITHUB_REDIRECT_URI=https://yourapp.com/auth/github/callback",
+    },
+  ],
   sources: [
     {
       title: "Creating an OAuth app — GitHub Docs",
