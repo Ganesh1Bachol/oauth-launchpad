@@ -1,7 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { Guide as GuideSchema, type Guide } from "@/lib/schema";
 
-const MODEL = process.env.LAUNCHPAD_MODEL || "claude-opus-5";
+// Sonnet 5 is the cost-conscious default for this structured research task
+// (~2.5x cheaper than Opus 5, quality holds). Override with LAUNCHPAD_MODEL.
+const MODEL = process.env.LAUNCHPAD_MODEL || "claude-sonnet-5";
 const EFFORT = (process.env.LAUNCHPAD_EFFORT || "medium") as
   | "low"
   | "medium"
